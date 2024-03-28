@@ -1,40 +1,38 @@
 # review-app
 
 ```
-POST /api/user/create --> same as signup in tutorial
-POST /api/user/login --> same as signin in tutorial
+POST /api/user/create
+POST /api/user/login
 
-GET /api/user/attended/:event_name
+GET /api/user/attended/:eventid
 REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "user __username__ attended __event_name__"
+        "message": "user __username__ attended __eventid__"
     }
 }
 
 
 POST /api/event/create
 REQ: {
-    "event_name": "", required
-    "organized_by": [
-        "username1/2/3",
-    ]
+    "eventid": "", # required
+    "title": "", # optional
 }
 RESP: {
     "success": boolean,
     "data": {
-        "message": "event __event_name__ created successfully",
+        "message": "event __eventid__ created by organizer __user_name__ successfully",
     }
 }
 
 
-GET /api/event/summary/:event_name
+GET /api/event/summary/:eventid
 REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "summarized reviews of __event_name__",
+        "message": "summarized reviews of __eventid__",
         "avg_registration_exp": [1 - 10],
         "avg_event_exp": [1-10],
         "avg_breakfast_exp": [1-10],
@@ -43,12 +41,12 @@ RESP: {
 }
 
 
-GET /api/event/reviews/:event_name/:page_number
+GET /api/event/reviews/:eventid/:page_number
 REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "page 1/2/3 : reviews of __event_name__",
+        "message": "page 1/2/3 : reviews of __eventid__",
         "reviews": [
             { review_obj_1 },
             { review_obj_2 },
@@ -59,7 +57,7 @@ RESP: {
 
 
 
-POST /api/review/submit/:event_name
+POST /api/review/submit/:eventid
 REQ: {
     "registration_exp": [1 - 10], # required/optional
     "event_exp": [1-10], # required/optional
