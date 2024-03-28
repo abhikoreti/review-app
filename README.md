@@ -64,19 +64,19 @@ REQ: {
     "breakfast_exp": [1-10], # required/optional
 
     "overall_exp": [1-10], # optional
-    "review": "" # optional
+    "comment": "" # optional
 }
 RESP: {
     "success": boolean,
     "data": {
         "message": "",
-        "review_id": ""
+        "reviewid": ""
     }
 }
 
 
 
-GET /api/review/like/:review_id
+GET /api/review/like/:reviewid
 REQ: None
 RESP: {
     "success": boolean,
@@ -87,7 +87,7 @@ RESP: {
 
 
 
-GET /api/review/report/:review_id
+GET /api/review/report/:reviewid
 REQ: None
 RESP: {
     "success": boolean,
@@ -98,9 +98,9 @@ RESP: {
 
 
 
-POST /api/review/respond/:review_id
+POST /api/review/respond/:reviewid
 REQ: {
-    "comment": "" # required
+    "response": "" # required
 }
 RESP: {
     "success": boolean,

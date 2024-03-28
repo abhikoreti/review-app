@@ -5,7 +5,7 @@ const dbConfig = require("./app/config/db.config");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+    origin: "http://localhost:8081",
 };
 
 app.use(cors(corsOptions));
@@ -20,66 +20,67 @@ const db = require("./app/models");
 const Role = db.role;
 
 db.mongoose
-  .connect(dbConfig.URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
-    initial();
-  })
-  .catch((err) => {
-    console.error("Connection error", err);
-    process.exit();
-  });
+    .connect(dbConfig.URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log("Successfully connect to MongoDB.");
+        initial();
+    })
+    .catch((err) => {
+        console.error("Connection error", err);
+        process.exit();
+    });
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the application." });
+    res.json({ message: "Welcome to the application." });
 });
 
 // routes
 require("./app/routes/event.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/review.route")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+    console.log(`Server is running on port ${PORT}.`);
 });
 
 function initial() {
-  Role.estimatedDocumentCount((err, count) => {
-    if (!err && count === 0) {
-      new Role({
-        name: "user",
-      }).save((err) => {
-        if (err) {
-          console.log("error", err);
+    Role.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            new Role({
+                name: "user",
+            }).save((err) => {
+                if (err) {
+                    console.log("error", err);
+                }
+
+                console.log("added 'user' to roles collection");
+            });
+
+            new Role({
+                name: "organizer",
+            }).save((err) => {
+                if (err) {
+                    console.log("error", err);
+                }
+
+                console.log("added 'organizer' to roles collection");
+            });
+
+            new Role({
+                name: "admin",
+            }).save((err) => {
+                if (err) {
+                    console.log("error", err);
+                }
+
+                console.log("added 'admin' to roles collection");
+            });
         }
-
-        console.log("added 'user' to roles collection");
-      });
-
-      new Role({
-        name: "organizer",
-      }).save((err) => {
-        if (err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'organizer' to roles collection");
-      });
-
-      new Role({
-        name: "admin",
-      }).save((err) => {
-        if (err) {
-          console.log("error", err);
-        }
-
-        console.log("added 'admin' to roles collection");
-      });
-    }
-  });
+    });
 }

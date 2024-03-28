@@ -93,11 +93,15 @@ exports.signin = (req, res) => {
                 });
             }
 
-            const token = jwt.sign({ id: user.id }, config.secret, {
-                algorithm: "HS256",
-                allowInsecureKeySizes: true,
-                expiresIn: 86400,
-            });
+            const token = jwt.sign(
+                { id: user.id, username: user.username },
+                config.secret,
+                {
+                    algorithm: "HS256",
+                    allowInsecureKeySizes: true,
+                    expiresIn: 86400,
+                }
+            );
 
             var authorities = [];
 
@@ -121,31 +125,22 @@ exports.attended = (req, res) => {
             return;
         }
 
-        Event.findOne({
-            eventid: req.params.eventid,
-        }).exec((err, event) => {
-            if (err) {
-                res.status(500).send({ message: err });
-                return;
-            }
+        if (user.events.indexOf(req.eventObjId) != -1) {
+            res.status(400).send({
+                message: `User ${user.username} has already attended ${req.eventObjTitle}!`,
+            });
+        } else {
+            user.events.push(req.eventObjId);
+            user.save((err) => {
+                if (err) {
+                    res.status(500).send({ message: err });
+                    return;
+                }
 
-            if (user.events.indexOf(event._id) != -1) {
                 res.send({
-                    message: `user ${user.username} has already attended ${event.title}!`,
+                    message: `User ${user.username} attended ${req.eventObjTitle} successfully!`,
                 });
-            } else {
-                user.events.push(event._id);
-                user.save((err) => {
-                    if (err) {
-                        res.status(500).send({ message: err });
-                        return;
-                    }
-
-                    res.send({
-                        message: `user ${user.username} attended ${event.title} successfully!`,
-                    });
-                });
-            }
-        });
+            });
+        }
     });
 };

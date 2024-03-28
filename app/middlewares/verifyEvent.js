@@ -13,19 +13,21 @@ checkValidEvent = (req, res, next) => {
 
     Event.findOne({
         eventid: eventid,
-    }).exec((err, user) => {
+    }).exec((err, event) => {
         if (err) {
             res.status(500).send({ message: err });
             return;
         }
 
-        if (!user) {
+        if (!event) {
             res.status(400).send({
                 message: "Failed! Event does not exists!",
             });
             return;
         }
 
+        req.eventObjId = event._id;
+        req.eventObjTitle = event.title;
         next();
     });
 };
