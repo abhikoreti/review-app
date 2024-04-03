@@ -1,8 +1,36 @@
-# review-app
+# Review API
+
+### [Review API Docs](https://documenter.getpostman.com/view/33893243/2sA35K2Ltq)
 
 ```
 POST /api/user/create
+REQ: {
+    "username": "",  # required
+    "email": "",     # required
+    "password": "",  # required
+    "roles": ["role1", "role2"]  # required
+}
+RESP: {
+    "success": boolean,
+    "data": {
+        "message": "User was registered successfully!"
+    }
+}
+
 POST /api/user/login
+REQ: {
+    "username": "", # required
+    "password": ""  # required
+}
+RESP: {
+    "id": "",
+    "username": "",
+    "email": "",
+    "roles": [
+        "ROLE_"
+    ],
+    "accessToken": ""
+}
 
 GET /api/user/attended/:eventid
 REQ: None
@@ -26,7 +54,7 @@ RESP: {
     }
 }
 
-
+TODO:
 GET /api/event/summary/:eventid
 REQ: None
 RESP: {
@@ -40,7 +68,7 @@ RESP: {
     }
 }
 
-
+TODO:
 GET /api/event/reviews/:eventid/:page_number
 REQ: None
 RESP: {
@@ -100,7 +128,7 @@ RESP: {
 
 POST /api/review/respond/:reviewid
 REQ: {
-    "response": "" # required
+    "organizer_response": "" # required
 }
 RESP: {
     "success": boolean,

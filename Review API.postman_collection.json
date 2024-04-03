@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "b7bd3083-3122-4658-b9c1-bbcc46648117",
+		"name": "Review API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33893243"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"ACCESS-TOKEN\", jsonData.accessToken);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDQxMjI1N2M4NDNkNTc3MTc1NTVhYyIsImlhdCI6MTcxMTU0MzYyMywiZXhwIjoxNzExNjMwMDIzfQ.E10jB_BDN7dKpyDOrypXfkNvQ97SeVf-zhfTvS2LCb8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shardul\",\r\n    \"password\": \"432790\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/user/login",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"shardul\",\r\n    \"email\": \"shardul@gmail.com\",\r\n    \"password\": \"432790\",\r\n    \"roles\": [\"user\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/user/create",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attended",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{ACCESS-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE-URL}}/api/user/attended/abh",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"attended",
+								"abh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{ACCESS-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eventid\": \"ytl\",\r\n    \"title\": \"Diwali Party\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/event/create",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organizer",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"ACCESS-TOKEN\", jsonData.accessToken);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDQxMjI1N2M4NDNkNTc3MTc1NTVhYyIsImlhdCI6MTcxMTU0MzYyMywiZXhwIjoxNzExNjMwMDIzfQ.E10jB_BDN7dKpyDOrypXfkNvQ97SeVf-zhfTvS2LCb8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"abhinay\",\r\n    \"password\": \"432790\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/user/login",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"klin\",\r\n    \"email\": \"klin@gmail.com\",\r\n    \"password\": \"432790\",\r\n    \"roles\": [\"user\", \"organizer\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/user/create",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Submit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{ACCESS-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"The diwali party event was great. I enjoyed it a lot. But it could have been more enjoyable if there were less crackers.\",\r\n    \"registration_exp\": 9,\r\n    \"event_exp\": 8,\r\n    \"breakfast_exp\": 7,\r\n    \"overall_exp\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/review/submit/ytl",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"review",
+								"submit",
+								"ytl"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Response",
+			"item": [
+				{
+					"name": "Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{ACCESS-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"organizer_response\": \"Hello, we hope you like our event\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE-URL}}/api/review/respond/660d7d73ed3167a378e8252b",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"review",
+								"respond",
+								"660d7d73ed3167a378e8252b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

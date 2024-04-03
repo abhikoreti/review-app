@@ -27,4 +27,14 @@ module.exports = function (app) {
         [authJwt.verifyToken, verifyReview.checkValidReview],
         review_controller.report
     );
+
+    app.post(
+        "/api/review/respond/:reviewid",
+        [
+            authJwt.verifyToken,
+            authJwt.isOrganizer,
+            verifyReview.checkValidReview,
+        ],
+        review_controller.createResponse
+    );
 };

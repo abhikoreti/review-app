@@ -4,7 +4,7 @@ const Review = db.review;
 checkValidReview = (req, res, next) => {
     let reviewid = req.params.reviewid;
 
-    if (!reviewid.match(/^[0-9a-z]+$/i)) {
+    if (!reviewid.match(/^[0-9a-zA-Z]+$/i)) {
         res.status(400).send({
             message: "Failed! reviewid should be alphanumeric only!",
         });
@@ -24,7 +24,7 @@ checkValidReview = (req, res, next) => {
             return;
         }
 
-        req.reviewObjId = review._id;
+        req.reviewObj = review;
         next();
     });
 };

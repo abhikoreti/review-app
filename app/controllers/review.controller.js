@@ -47,7 +47,7 @@ exports.createReview = (req, res) => {
                                 return;
                             }
 
-                            res.send({
+                            res.status(200).send({
                                 message: `User ${user.username}'s review submitted for ${req.eventObjTitle} event successfully!`,
                                 reviewid: review._id,
                             });
@@ -64,70 +64,105 @@ exports.createReview = (req, res) => {
 };
 
 exports.like = (req, res) => {
-    Review.findById(req.params.reviewid).exec((err, review) => {
-        if (err) {
-            res.status(500).send({ message: err });
-            return;
-        }
+    let review = req.reviewObj;
 
-        if (review.is_flagged) {
-            res.status(400).send({
-                message: `Falied! Review is flagged!`,
-            });
-        }
+    if (review.is_flagged) {
+        res.status(400).send({
+            message: `Failed! Review is flagged!`,
+        });
+    }
 
-        if (review.likes.indexOf(req.userId) != -1) {
-            res.status(400).send({
-                message: `Falied! User has already liked the review!`,
-            });
-        } else if (review.reports.indexOf(req.userId) != -1) {
-            res.status(400).send({
-                message: `Falied! User has already reported the review!`,
-            });
-        } else {
-            review.likes.push(req.userId);
-            review.save((err) => {
-                if (err) {
-                    res.status(500).send({ message: err });
-                    return;
-                }
+    if (review.likes.indexOf(req.userId) != -1) {
+        res.status(400).send({
+            message: `Falied! User has already liked the review!`,
+        });
+    } else if (review.reports.indexOf(req.userId) != -1) {
+        res.status(400).send({
+            message: `Falied! User has already reported the review!`,
+        });
+    } else {
+        review.likes.push(req.userId);
+        review.save((err) => {
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
 
-                res.send({
-                    message: `User liked the review successfully!`,
-                });
+            res.send({
+                message: `User liked the review successfully!`,
             });
-        }
-    });
+        });
+    }
 };
 
 exports.report = (req, res) => {
-    Review.findById(req.params.reviewid).exec((err, review) => {
+    let review = req.reviewObj;
+
+    if (review.reports.indexOf(req.userId) != -1) {
+        res.status(400).send({
+            message: `Falied! User has already reported the review!`,
+        });
+    } else if (review.likes.indexOf(req.userId) != -1) {
+        res.status(400).send({
+            message: `Falied! User has already liked the review!`,
+        });
+    } else {
+        review.reports.push(req.userId);
+        if (review.reports.length > 4) {
+            review.is_flagged = true;
+        }
+        review.save((err) => {
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
+
+            res.send({
+                message: `User ${req.userName} reported the review successfully!`,
+            });
+        });
+    }
+};
+
+exports.createResponse = (req, res) => {
+    let review = req.reviewObj;
+
+    if (review.is_flagged) {
+        res.status(400).send({
+            message: `Cannot respond! Review is flagged!`,
+        });
+        return;
+    }
+
+    if (review.organizer_response != "") {
+        res.status(400).send({
+            message: `Failed! Organizer ${req.userName} has already responded to the review!`,
+        });
+        return;
+    }
+
+    Event.findById(review.event).exec((err, event) => {
         if (err) {
             res.status(500).send({ message: err });
             return;
         }
-
-        if (review.reports.indexOf(req.userId) != -1) {
+        // console.log(req.userId);
+        // console.log(event.organizer);
+        if (req.userId != event.organizer.toString()) {
             res.status(400).send({
-                message: `Falied! User has already reported the review!`,
-            });
-        } else if (review.likes.indexOf(req.userId) != -1) {
-            res.status(400).send({
-                message: `Falied! User has already liked the review!`,
+                message: `Organizer ${req.userName} did not organize the ${event.title} event. Hence cannot respond!`,
             });
         } else {
-            review.reports.push(req.userId);
-            if (review.reports.length > 4) {
-                review.is_flagged = true;
-            }
+            review.organizer_response = req.body.organizer_response;
             review.save((err) => {
                 if (err) {
                     res.status(500).send({ message: err });
                     return;
                 }
 
-                res.send({
-                    message: `User ${req.userName} reported the review successfully!`,
+                res.status(200).send({
+                    message: `Organizer ${req.userName} submitted response for event successfully!`,
+                    comment: review.organizer_response,
                 });
             });
         }

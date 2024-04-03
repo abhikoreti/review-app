@@ -21,23 +21,9 @@ module.exports = function (app) {
 
     app.post("/api/user/login", user_controller.signin);
 
-    // app.get("/api/test/all", user_controller.allAccess);
-
     app.get(
         "/api/user/attended/:eventid",
         [authJwt.verifyToken, verifyEvent.checkValidEvent],
         user_controller.attended
     );
-
-    // app.get(
-    //   "/api/test/org",
-    //   [authJwt.verifyToken, authJwt.isOrganizer],
-    //   user_controller.organizerBoard
-    // );
-
-    // app.get(
-    //   "/api/test/admin",
-    //   [authJwt.verifyToken, authJwt.isAdmin],
-    //   user_controller.adminBoard
-    // );
 };
