@@ -146,8 +146,6 @@ exports.createResponse = (req, res) => {
             res.status(500).send({ message: err });
             return;
         }
-        // console.log(req.userId);
-        // console.log(event.organizer);
         if (req.userId != event.organizer.toString()) {
             res.status(400).send({
                 message: `Organizer ${req.userName} did not organize the ${event.title} event. Hence cannot respond!`,

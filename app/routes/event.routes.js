@@ -19,4 +19,10 @@ module.exports = function (app) {
         ],
         event_controller.create
     );
+
+    app.get(
+        "/api/event/reviews/:eventid/:page",
+        [authJwt.verifyToken, verifyEvent.checkValidEvent],
+        event_controller.paginate
+    );
 };
