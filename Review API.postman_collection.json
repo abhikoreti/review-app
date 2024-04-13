@@ -37,7 +37,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shardul\",\r\n    \"password\": \"432790\"\r\n}",
+							"raw": "{\r\n\t\"username\": \"sahil\",\r\n\t\"password\": \"653000\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,7 +54,8 @@
 								"user",
 								"login"
 							]
-						}
+						},
+						"description": "Logs in a user using username and password"
 					},
 					"response": []
 				},
@@ -65,7 +66,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shardul\",\r\n    \"email\": \"shardul@gmail.com\",\r\n    \"password\": \"432790\",\r\n    \"roles\": [\"user\"]\r\n}",
+							"raw": "{\r\n    \"username\": \"sahil\",\r\n    \"email\": \"sahil@gmail.com\",\r\n    \"password\": \"653000\",\r\n    \"roles\": [\"user\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -82,7 +83,8 @@
 								"user",
 								"create"
 							]
-						}
+						},
+						"description": "Creates a new user (Note: username should be unique)"
 					},
 					"response": []
 				},
@@ -98,7 +100,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASE-URL}}/api/user/attended/abh",
+							"raw": "{{BASE-URL}}/api/user/attended/club",
 							"host": [
 								"{{BASE-URL}}"
 							],
@@ -106,13 +108,15 @@
 								"api",
 								"user",
 								"attended",
-								"abh"
+								"club"
 							]
-						}
+						},
+						"description": "Allows a user to attend an event"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "**Requests for User:**\n\n- Login\n    \n- Create\n    \n- Attended"
 		},
 		{
 			"name": "Event",
@@ -130,7 +134,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"eventid\": \"ytl\",\r\n    \"title\": \"Diwali Party\"\r\n}",
+							"raw": "{\r\n    \"eventid\": \"art\",\r\n    \"title\": \"Way of Art\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -147,11 +151,68 @@
 								"event",
 								"create"
 							]
-						}
+						},
+						"description": "Creates a new event (Note: eventid is unique)"
+					},
+					"response": []
+				},
+				{
+					"name": "Paginate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{ACCESS-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE-URL}}/api/event/reviews/ytl/1",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"reviews",
+								"ytl",
+								"1"
+							]
+						},
+						"description": "Fetches paginated reviews for an event"
+					},
+					"response": []
+				},
+				{
+					"name": "Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{ACCESS-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE-URL}}/api/event/summary/ytl",
+							"host": [
+								"{{BASE-URL}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"summary",
+								"ytl"
+							]
+						},
+						"description": "Fetches summarized reviews for an event"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "**Requests for Event:**\n\n- Create\n    \n- Paginate\n    \n- Summary"
 		},
 		{
 			"name": "Organizer",
@@ -184,7 +245,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"abhinay\",\r\n    \"password\": \"432790\"\r\n}",
+							"raw": "{\r\n    \"username\": \"shardul\",\r\n    \"password\": \"475829\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,7 +262,8 @@
 								"user",
 								"login"
 							]
-						}
+						},
+						"description": "Allows an Organizer to login"
 					},
 					"response": []
 				},
@@ -212,7 +274,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"klin\",\r\n    \"email\": \"klin@gmail.com\",\r\n    \"password\": \"432790\",\r\n    \"roles\": [\"user\", \"organizer\"]\r\n}",
+							"raw": "{\r\n    \"username\": \"shardul\",\r\n    \"email\": \"shardul@gmail.com\",\r\n    \"password\": \"475829\",\r\n    \"roles\": [\"user\", \"organizer\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,11 +291,13 @@
 								"user",
 								"create"
 							]
-						}
+						},
+						"description": "Create a new Organizer"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "**Request for Organizer:**\n\n- Login\n    \n- Signup"
 		},
 		{
 			"name": "Review",
@@ -251,7 +315,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"comment\": \"The diwali party event was great. I enjoyed it a lot. But it could have been more enjoyable if there were less crackers.\",\r\n    \"registration_exp\": 9,\r\n    \"event_exp\": 8,\r\n    \"breakfast_exp\": 7,\r\n    \"overall_exp\": 10\r\n}",
+							"raw": "{\r\n    \"comment\": \"Running the Race for Peace Marathon was an unforgettable experience! The event was well-organized, the volunteers were encouraging, and crossing the finish line was a moment of triumph. Already looking forward to next year's race!\",\r\n    \"registration_exp\": 9,\r\n    \"event_exp\": 9,\r\n    \"breakfast_exp\": 8,\r\n    \"overall_exp\": 9\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -259,7 +323,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/review/submit/ytl",
+							"raw": "{{BASE-URL}}/api/review/submit/Race",
 							"host": [
 								"{{BASE-URL}}"
 							],
@@ -267,13 +331,15 @@
 								"api",
 								"review",
 								"submit",
-								"ytl"
+								"Race"
 							]
-						}
+						},
+						"description": "Submit a review for an attended event"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "**Requests for Review:**\n\n- Submit"
 		},
 		{
 			"name": "Response",
@@ -291,7 +357,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"organizer_response\": \"Hello, we hope you like our event\"\r\n}",
+							"raw": "{\r\n    \"organizer_response\": \"Hello, we hope you like our event. We will make sure there will be less water based colors next time\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,11 +375,13 @@
 								"respond",
 								"660d7d73ed3167a378e8252b"
 							]
-						}
+						},
+						"description": "Submit a response for a review"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "**Request for Response:**\n\n- Comment"
 		}
 	]
 }

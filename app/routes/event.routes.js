@@ -25,4 +25,10 @@ module.exports = function (app) {
         [authJwt.verifyToken, verifyEvent.checkValidEvent],
         event_controller.paginate
     );
+
+    app.get(
+        "/api/event/summary/:eventid",
+        [authJwt.verifyToken, verifyEvent.checkValidEvent],
+        event_controller.summary
+    );
 };

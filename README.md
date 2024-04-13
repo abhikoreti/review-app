@@ -42,10 +42,10 @@ RESP: {
 ```
 REQ: None
 RESP: {
-"success": boolean,
-"data": {
-"message": "user **username** attended **eventid**"
-}
+    "success": boolean,
+    "data": {
+        "message": "user **username** attended **eventid**"
+    }
 }
 ```
 
@@ -53,51 +53,47 @@ RESP: {
 
 ```
 REQ: {
-"eventid": "", # required
-"title": "", # optional
+    "eventid": "", # required
+    "title": "", # optional
 }
 RESP: {
-"success": boolean,
-"data": {
-"message": "event **eventid** created by organizer **user_name** successfully",
-}
+    "success": boolean,
+    "data": {
+        "message": "event **eventid** created by organizer **user_name** successfully",
+    }
 }
 ```
-
-<!--TODO-->
 
 5. GET /api/event/summary/:eventid
 
 ```
 REQ: None
 RESP: {
-"success": boolean,
-"data": {
-"message": "summarized reviews of **eventid**",
-"avg_registration_exp": [1 - 10],
-"avg_event_exp": [1-10],
-"avg_breakfast_exp": [1-10],
-"avg_overall_exp": [1-10],
-}
+    "success": boolean,
+    "data": {
+        "message": "Summarized reviews of **eventid**",
+        "avg_registration_exp": [1 - 10],
+        "avg_event_exp": [1-10],
+        "avg_breakfast_exp": [1-10],
+        "avg_overall_exp": [1-10],
+    }
 }
 ```
-
-<!--TODO-->
 
 6. GET /api/event/reviews/:eventid/:page_number
 
 ```
 REQ: None
 RESP: {
-"success": boolean,
-"data": {
-"message": "page 1/2/3 : reviews of **eventid**",
-"reviews": [
-{ review_obj_1 },
-{ review_obj_2 },
-{ review_obj_3 },
-]
-}
+    "success": boolean,
+    "data": {
+        "message": "page 1/2/3 : reviews of **eventid**",
+        "reviews": [
+            { review_obj_1 },
+            { review_obj_2 },
+            { review_obj_3 },
+        ]
+    }
 }
 ```
 
@@ -105,20 +101,18 @@ RESP: {
 
 ```
 REQ: {
-"registration_exp": [1 - 10], # required/optional
-"event_exp": [1-10], # required/optional
-"breakfast_exp": [1-10], # required/optional
-
+    "registration_exp": [1 - 10], # required/optional
+    "event_exp": [1-10], # required/optional
+    "breakfast_exp": [1-10], # required/optional
     "overall_exp": [1-10], # optional
     "comment": "" # optional
-
 }
 RESP: {
-"success": boolean,
-"data": {
-"message": "",
-"reviewid": ""
-}
+    "success": boolean,
+    "data": {
+        "message": "",
+        "reviewid": ""
+    }
 }
 ```
 
@@ -127,10 +121,10 @@ RESP: {
 ```
 REQ: None
 RESP: {
-"success": boolean,
-"data": {
-"message": "review liked"
-}
+    "success": boolean,
+    "data": {
+        "message": "review liked"
+    }
 }
 ```
 
@@ -139,10 +133,10 @@ RESP: {
 ```
 REQ: None
 RESP: {
-"success": boolean,
-"data": {
-"message": "review reported"
-}
+    "success": boolean,
+    "data": {
+        "message": "review reported"
+    }
 }
 ```
 
@@ -150,12 +144,12 @@ RESP: {
 
 ```
 REQ: {
-"organizer_response": "" # required
+    "organizer_response": "" # required
 }
 RESP: {
-"success": boolean,
-"data": {
-"message": "organizers comment added"
-}
+    "success": boolean,
+    "data": {
+        "message": "organizers comment added"
+    }
 }
 ```
