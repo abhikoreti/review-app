@@ -27,13 +27,13 @@ REQ: {
     "password": ""  # required
 }
 RESP: {
-    "id": "",
-    "username": "",
-    "email": "",
+    "id": "**user_id**",
+    "username": "**user_name**",
+    "email": "**user_email**",
     "roles": [
         "ROLE_"
     ],
-    "accessToken": ""
+    "accessToken": "**access_token**"
 }
 ```
 
@@ -44,7 +44,7 @@ REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "user **username** attended **eventid**"
+        "message": "User **user_name** attended **event_title** successfully!"
     }
 }
 ```
@@ -59,7 +59,7 @@ REQ: {
 RESP: {
     "success": boolean,
     "data": {
-        "message": "event **eventid** created by organizer **user_name** successfully",
+        "message": "Event **event_id** created by organizer **user_name** successfully",
     }
 }
 ```
@@ -71,7 +71,7 @@ REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "Summarized reviews of **eventid**",
+        "message": "Summarized reviews of **event_title**",
         "avg_registration_exp": [1 - 10],
         "avg_event_exp": [1-10],
         "avg_breakfast_exp": [1-10],
@@ -87,7 +87,9 @@ REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "page 1/2/3 : reviews of **eventid**",
+        "message": "Page 1/2/3 : Reviews of **event_title** event",
+        "totalReviews": "",
+        "page": "1/2/3... of [1/2/3...]",
         "reviews": [
             { review_obj_1 },
             { review_obj_2 },
@@ -110,8 +112,8 @@ REQ: {
 RESP: {
     "success": boolean,
     "data": {
-        "message": "",
-        "reviewid": ""
+        "message": "User **user_name**'s review submitted for **event_title** event successfully!",
+        "reviewid": "review_id"
     }
 }
 ```
@@ -123,7 +125,7 @@ REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "review liked"
+        "message": "User liked the review successfully!"
     }
 }
 ```
@@ -135,7 +137,7 @@ REQ: None
 RESP: {
     "success": boolean,
     "data": {
-        "message": "review reported"
+        "message": "User reported the review successfully!"
     }
 }
 ```
@@ -149,7 +151,7 @@ REQ: {
 RESP: {
     "success": boolean,
     "data": {
-        "message": "organizers comment added"
+        "message": "Organizer **user_name** submitted response for event successfully!"
     }
 }
 ```

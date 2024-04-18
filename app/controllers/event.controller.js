@@ -63,7 +63,7 @@ exports.paginate = (req, res) => {
                         page: `${page} of ${Math.ceil(
                             totalDocuments / reviewCount
                         )}`,
-                        review: review,
+                        reviews: review,
                     });
                 }
             );
@@ -102,10 +102,8 @@ exports.summary = (req, res) => {
             });
             return;
         }
-        // console.log(review);
-        // console.log(review[0]);
+
         const result = review[0];
-        // const count = result.count;
 
         res.status(200).send({
             message: `Summarized reviews of ${req.eventObjTitle}`,

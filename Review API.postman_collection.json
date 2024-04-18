@@ -31,7 +31,7 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDQxMjI1N2M4NDNkNTc3MTc1NTVhYyIsImlhdCI6MTcxMTU0MzYyMywiZXhwIjoxNzExNjMwMDIzfQ.E10jB_BDN7dKpyDOrypXfkNvQ97SeVf-zhfTvS2LCb8",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
@@ -45,9 +45,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/user/login",
+							"raw": "https://review-app-cyan.vercel.app/api/user/login",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -74,9 +74,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/user/create",
+							"raw": "https://review-app-cyan.vercel.app/api/user/create",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -95,14 +95,14 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "{{ACCESS-TOKEN}}",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{BASE-URL}}/api/user/attended/club",
+							"raw": "https://review-app-cyan.vercel.app/api/user/attended/club",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -128,7 +128,7 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "{{ACCESS-TOKEN}}",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
@@ -142,9 +142,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/event/create",
+							"raw": "https://review-app-cyan.vercel.app/api/event/create",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -163,14 +163,14 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "{{ACCESS-TOKEN}}",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{BASE-URL}}/api/event/reviews/ytl/1",
+							"raw": "https://review-app-cyan.vercel.app/api/event/reviews/ytl/1",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -191,14 +191,14 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "{{ACCESS-TOKEN}}",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{BASE-URL}}/api/event/summary/ytl",
+							"raw": "https://review-app-cyan.vercel.app/api/event/summary/ytl",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -239,7 +239,7 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDQxMjI1N2M4NDNkNTc3MTc1NTVhYyIsImlhdCI6MTcxMTU0MzYyMywiZXhwIjoxNzExNjMwMDIzfQ.E10jB_BDN7dKpyDOrypXfkNvQ97SeVf-zhfTvS2LCb8",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
@@ -253,9 +253,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/user/login",
+							"raw": "https://review-app-cyan.vercel.app/api/user/login",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -282,9 +282,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/user/create",
+							"raw": "https://review-app-cyan.vercel.app/api/user/create",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -309,7 +309,7 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "{{ACCESS-TOKEN}}",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
@@ -323,9 +323,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/review/submit/Race",
+							"raw": "https://review-app-cyan.vercel.app/api/review/submit/Race",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",
@@ -351,7 +351,7 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "{{ACCESS-TOKEN}}",
+								"value": "<your-access-token>",
 								"type": "text"
 							}
 						],
@@ -365,9 +365,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE-URL}}/api/review/respond/660d7d73ed3167a378e8252b",
+							"raw": "https://review-app-cyan.vercel.app/api/review/respond/660d7d73ed3167a378e8252b",
 							"host": [
-								"{{BASE-URL}}"
+								"https://review-app-cyan.vercel.app"
 							],
 							"path": [
 								"api",

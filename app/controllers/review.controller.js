@@ -118,7 +118,7 @@ exports.report = (req, res) => {
             }
 
             res.send({
-                message: `User ${req.userName} reported the review successfully!`,
+                message: `User reported the review successfully!`,
             });
         });
     }
