@@ -1,13 +1,16 @@
 const db = require("../models");
+const { makeResponse } = require("../utils/common.js");
 const Event = db.event;
 
 checkValidEvent = (req, res, next) => {
     let eventid = req.params.eventid;
 
     if (!eventid.match(/^[0-9a-z\-]+$/i)) {
-        res.status(400).send({
-            message: "Failed! eventid should be alphanumeric only!",
-        });
+        res.status(400).send(
+            makeResponse(false, {
+                message: "Failed! eventid should be alphanumeric only!",
+            })
+        );
         return;
     }
 
@@ -15,14 +18,16 @@ checkValidEvent = (req, res, next) => {
         eventid: eventid,
     }).exec((err, event) => {
         if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send(makeResponse(false, { message: err }));
             return;
         }
 
         if (!event) {
-            res.status(400).send({
-                message: "Failed! Event does not exists!",
-            });
+            res.status(400).send(
+                makeResponse(false, {
+                    message: "Failed! Event does not exists!",
+                })
+            );
             return;
         }
 
@@ -36,9 +41,11 @@ checkDuplicateEvent = (req, res, next) => {
     let eventid = req.body.eventid;
 
     if (!eventid.match(/^[0-9a-z\-]+$/i)) {
-        res.status(400).send({
-            message: "Failed! eventid should be alphanumeric only!",
-        });
+        res.status(400).send(
+            makeResponse(false, {
+                message: "Failed! eventid should be alphanumeric only!",
+            })
+        );
         return;
     }
 
@@ -46,14 +53,16 @@ checkDuplicateEvent = (req, res, next) => {
         eventid: eventid,
     }).exec((err, user) => {
         if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send(makeResponse(false, { message: err }));
             return;
         }
 
         if (user) {
-            res.status(400).send({
-                message: "Failed! Event with same eventid already exists!",
-            });
+            res.status(400).send(
+                makeResponse(false, {
+                    message: "Failed! Event with same eventid already exists!",
+                })
+            );
             return;
         }
 

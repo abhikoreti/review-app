@@ -6,6 +6,7 @@ const Event = db.event;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { makeResponse } = require("../utils/common.js");
 
 exports.signup = (req, res) => {
     const user = new User({
@@ -17,7 +18,7 @@ exports.signup = (req, res) => {
 
     user.save((err, user) => {
         if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send(makeResponse(false, { message: err }));
             return;
         }
 
@@ -28,40 +29,50 @@ exports.signup = (req, res) => {
                 },
                 (err, roles) => {
                     if (err) {
-                        res.status(500).send({ message: err });
+                        res.status(500).send(
+                            makeResponse(false, { message: err })
+                        );
                         return;
                     }
 
                     user.roles = roles.map((role) => role._id);
                     user.save((err) => {
                         if (err) {
-                            res.status(500).send({ message: err });
+                            res.status(500).send(
+                                makeResponse(false, { message: err })
+                            );
                             return;
                         }
 
-                        res.send({
-                            message: "User was registered successfully!",
-                        });
+                        res.status(200).send(
+                            makeResponse(true, {
+                                message: "User was registered successfully!",
+                            })
+                        );
                     });
                 }
             );
         } else {
             Role.findOne({ name: "user" }, (err, role) => {
                 if (err) {
-                    res.status(500).send({ message: err });
+                    res.status(500).send(makeResponse(false, { message: err }));
                     return;
                 }
 
                 user.roles = [role._id];
                 user.save((err) => {
                     if (err) {
-                        res.status(500).send({ message: err });
+                        res.status(500).send(
+                            makeResponse(false, { message: err })
+                        );
                         return;
                     }
 
-                    res.status(200).send({
-                        message: "User was registered successfully!",
-                    });
+                    res.status(200).send(
+                        makeResponse(true, {
+                            message: "User was registered successfully!",
+                        })
+                    );
                 });
             });
         }
@@ -75,12 +86,14 @@ exports.signin = (req, res) => {
         .populate("roles", "-__v")
         .exec((err, user) => {
             if (err) {
-                res.status(500).send({ message: err });
+                res.status(500).send(makeResponse(false, { message: err }));
                 return;
             }
 
             if (!user) {
-                return res.status(404).send({ message: "User Not found." });
+                return res
+                    .status(404)
+                    .send(makeResponse(false, { message: "User Not found." }));
             }
 
             var passwordIsValid = bcrypt.compareSync(
@@ -89,10 +102,12 @@ exports.signin = (req, res) => {
             );
 
             if (!passwordIsValid) {
-                return res.status(401).send({
-                    accessToken: null,
-                    message: "Invalid Password!",
-                });
+                return res.status(401).send(
+                    makeResponse(false, {
+                        accessToken: null,
+                        message: "Invalid Password!",
+                    })
+                );
             }
 
             const token = jwt.sign(
@@ -110,38 +125,45 @@ exports.signin = (req, res) => {
             for (let i = 0; i < user.roles.length; i++) {
                 authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
             }
-            res.status(200).send({
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                roles: authorities,
-                accessToken: token,
-            });
+
+            res.status(200).send(
+                makeResponse(true, {
+                    id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    roles: authorities,
+                    accessToken: token,
+                })
+            );
         });
 };
 
 exports.attended = (req, res) => {
     User.findById(req.userId).exec((err, user) => {
         if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send(makeResponse(false, { message: err }));
             return;
         }
 
         if (user.events.indexOf(req.eventObjId) != -1) {
-            res.status(400).send({
-                message: `User ${user.username} has already attended ${req.eventObjTitle}!`,
-            });
+            res.status(400).send(
+                makeResponse(false, {
+                    message: `User ${user.username} has already attended ${req.eventObjTitle}!`,
+                })
+            );
         } else {
             user.events.push(req.eventObjId);
             user.save((err) => {
                 if (err) {
-                    res.status(500).send({ message: err });
+                    res.status(500).send(makeResponse(false, { message: err }));
                     return;
                 }
 
-                res.send({
-                    message: `User ${user.username} attended ${req.eventObjTitle} successfully!`,
-                });
+                res.status(200).send(
+                    makeResponse(true, {
+                        message: `User ${user.username} attended ${req.eventObjTitle} successfully!`,
+                    })
+                );
             });
         }
     });

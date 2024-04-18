@@ -16,6 +16,16 @@ module.exports = function (app) {
         review_controller.createReview
     );
 
+    app.post(
+        "/api/review/respond/:reviewid",
+        [
+            authJwt.verifyToken,
+            authJwt.isOrganizer,
+            verifyReview.checkValidReview,
+        ],
+        review_controller.createResponse
+    );
+
     app.get(
         "/api/review/like/:reviewid",
         [authJwt.verifyToken, verifyReview.checkValidReview],
@@ -26,15 +36,5 @@ module.exports = function (app) {
         "/api/review/report/:reviewid",
         [authJwt.verifyToken, verifyReview.checkValidReview],
         review_controller.report
-    );
-
-    app.post(
-        "/api/review/respond/:reviewid",
-        [
-            authJwt.verifyToken,
-            authJwt.isOrganizer,
-            verifyReview.checkValidReview,
-        ],
-        review_controller.createResponse
     );
 };
