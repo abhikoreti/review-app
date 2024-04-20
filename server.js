@@ -15,8 +15,10 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+app.disable("x-powered-by");
 
 const db = require("./app/models");
+const swaggerDocs = require("./swagger");
 const Role = db.role;
 
 db.mongoose
@@ -33,11 +35,6 @@ db.mongoose
         process.exit();
     });
 
-// simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to the application." });
-});
-
 // routes
 require("./app/routes/event.routes")(app);
 require("./app/routes/user.routes")(app);
@@ -47,6 +44,7 @@ require("./app/routes/review.route")(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
+    swaggerDocs(app, PORT);
 });
 
 function initial() {
