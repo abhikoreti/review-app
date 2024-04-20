@@ -35,6 +35,11 @@ db.mongoose
         process.exit();
     });
 
+// simple route
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome to the application." });
+});
+
 // routes
 require("./app/routes/event.routes")(app);
 require("./app/routes/user.routes")(app);
