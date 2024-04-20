@@ -36,9 +36,9 @@ db.mongoose
     });
 
 // simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to the application." });
-});
+// app.get("/", (req, res) => {
+//     res.json({ message: "Welcome to the application." });
+// });
 
 // routes
 require("./app/routes/event.routes")(app);
