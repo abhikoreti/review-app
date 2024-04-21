@@ -26,6 +26,15 @@ const options = {
     },
     // looks for configuration in specified directories
     apis: ["app/routes/*.js"],
+    customJs: [
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.16.2/swagger-ui-bundle.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.16.2/swagger-ui-standalone-preset.min.js",
+    ],
+    customCssUrl: [
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.16.2/swagger-ui.min.css",
+
+        "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.16.2/swagger-ui.css",
+    ],
 };
 const swaggerSpec = swaggerJsdoc(options);
 function swaggerDocs(app) {
