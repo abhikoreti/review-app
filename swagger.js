@@ -28,9 +28,9 @@ const options = {
     apis: ["app/routes/*.js"],
 };
 const swaggerSpec = swaggerJsdoc(options);
-function swaggerDocs(app, port) {
+function swaggerDocs(app) {
     // Swagger Page
-    app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, options));
     // Documentation in JSON format
     app.get("/docs.json", (req, res) => {
         res.setHeader("Content-Type", "application/json");

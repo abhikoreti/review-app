@@ -5,7 +5,7 @@ const dbConfig = require("./app/config/db.config");
 const app = express();
 
 var corsOptions = {
-    origin: "http://localhost:8081",
+    origin: process.env.BASEURL,
 };
 
 app.use(cors(corsOptions));
@@ -18,7 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.disable("x-powered-by");
 
 const db = require("./app/models");
-const swaggerDocs = require("./swagger");
 const Role = db.role;
 
 db.mongoose
@@ -36,20 +35,19 @@ db.mongoose
     });
 
 // simple route
-// app.get("/", (req, res) => {
-//     res.json({ message: "Welcome to the application." });
-// });
+app.get("/", (req, res) => {
+    res.redirect("/docs");
+});
 
 // routes
 require("./app/routes/event.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/review.route")(app);
-
+require("./swagger")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
-    swaggerDocs(app, PORT);
 });
 
 function initial() {
