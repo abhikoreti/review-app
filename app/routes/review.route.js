@@ -19,12 +19,6 @@ module.exports = function (app) {
      *     - Review Controller
      *     summary: Submit a review for an event
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: eventid
      *         schema:
@@ -67,6 +61,8 @@ module.exports = function (app) {
      *                default: 9
      *                minimum: 1
      *                maximum: 10
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
@@ -91,12 +87,6 @@ module.exports = function (app) {
      *     - Review Controller
      *     summary: Submit a response for a review
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: reviewid
      *         schema:
@@ -115,6 +105,8 @@ module.exports = function (app) {
      *              organizer_response:
      *                type: string
      *                default: Hello, we hope you like our event. We will make sure there will be less water based colors next time
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
@@ -144,18 +136,14 @@ module.exports = function (app) {
      *     - Review Controller
      *     summary: Like a review
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: reviewid
      *         schema:
      *           type: string
      *         required: true
      *         description: The Review ID
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
@@ -180,18 +168,14 @@ module.exports = function (app) {
      *     - Review Controller
      *     summary: Report a review
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: reviewid
      *         schema:
      *           type: string
      *         required: true
      *         description: The Review ID
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success

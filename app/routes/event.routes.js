@@ -18,13 +18,6 @@ module.exports = function (app) {
      *     tags:
      *     - Event Controller
      *     summary: Create a new event
-     *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *     requestBody:
      *      required: true
      *      content:
@@ -41,6 +34,8 @@ module.exports = function (app) {
      *              title:
      *                type: string
      *                default: Downhill Domination
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
@@ -70,12 +65,6 @@ module.exports = function (app) {
      *     - Event Controller
      *     summary: Paginated reviews of an event
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: eventid
      *         schema:
@@ -89,6 +78,8 @@ module.exports = function (app) {
      *           minimum: 1
      *         required: true
      *         description: Page Number
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
@@ -113,18 +104,14 @@ module.exports = function (app) {
      *     - Event Controller
      *     summary: Summary of an event
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: eventid
      *         schema:
      *           type: string
      *         required: true
      *         description: The Event ID
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
@@ -139,5 +126,30 @@ module.exports = function (app) {
         "/api/event/summary/:eventid",
         [authJwt.verifyToken, verifyEvent.checkValidEvent],
         event_controller.summary
+    );
+
+    /**
+     * @openapi
+     * '/api/event/allevents':
+     *  get:
+     *     tags:
+     *     - Event Controller
+     *     summary: Get all events in database
+     *     security:
+     *       - bearerAuth: []
+     *     responses:
+     *      200:
+     *        description: Success
+     *      400:
+     *        description: Bad Request
+     *      401:
+     *        description: Unauthorized
+     *      500:
+     *        description: Server Error
+     */
+    app.get(
+        "/api/event/allevents",
+        [authJwt.verifyToken],
+        event_controller.getAllEvents
     );
 };

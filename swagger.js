@@ -13,6 +13,26 @@ const options = {
             },
             version: "1.0.0",
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    name: "x-access-token",
+                    type: "apiKey",
+                    in: "header",
+                    description: "Bearer token to access api endpoints",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                },
+            },
+        },
+
+        // Apply the security globally to all operations
+        // security: [
+        //     {
+        //         bearerAuth: [],
+        //     },
+        // ],
+
         servers: [
             {
                 url: "https://review-app-cyan.vercel.app/",

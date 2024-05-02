@@ -127,3 +127,19 @@ exports.summary = (req, res) => {
         );
     });
 };
+
+exports.getAllEvents = (req, res) => {
+    Event.find({}, { _id: 0, eventid: 1, title: 1 }, (err, events) => {
+        if (err) {
+            res.status(500).send(makeResponse(false, { message: err }));
+            return;
+        }
+        const eventList = events.map((event) => {
+            return {
+                event_name: event.title,
+                event_id: event.eventid,
+            };
+        });
+        res.status(200).send(makeResponse(true, { events: eventList }));
+    });
+};

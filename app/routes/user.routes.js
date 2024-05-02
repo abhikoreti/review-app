@@ -107,18 +107,14 @@ module.exports = function (app) {
      *     - User Controller
      *     summary: User attends an event
      *     parameters:
-     *       - in: header
-     *         name: x-access-token
-     *         schema:
-     *           type: string
-     *           format: jwt
-     *         required: true
      *       - in: path
      *         name: eventid
      *         schema:
      *           type: string
      *         required: true
      *         description: The Event ID
+     *     security:
+     *       - bearerAuth: []
      *     responses:
      *      200:
      *        description: Success
